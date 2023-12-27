@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Пример</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        .container{
+            max-width: 500px;
+            width: 100%;
+            height: 500px;
+            border: 2px solid black;
+            margin: 0 auto;
+            position: relative;
+            background: #f3ecc0;
+        }
+
+        .circle1{
+            width: 80px;
+            height: 80px;
+            border-radius: 100px;
+            background: #FF0000;
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            z-index: 1;
+            cursor: pointer;
+            animation: first-circle 10s linear infinite;
+        }
+
+        .circle2{
+            width: 80px;
+            height: 80px;
+            border-radius: 100px;
+            background: #cf81ff;
+            position: absolute;
+            top: 7%;
+            right: 5%;
+            z-index: 2;
+            cursor: pointer;
+            animation: second-circle 11s cubic-bezier(.17,.67,.71,.65) infinite;
+        }
+
+        .circle3{
+            width: 80px;
+            height: 80px;
+            border-radius: 100px;
+            background: #ffd946;
+            position: absolute;
+            top: 5%;
+            left: 45%;
+            z-index: 3;
+            cursor: pointer;
+            animation: third-circle 7s cubic-bezier(.4,.51,.54,.67) infinite;
+        }
+
+
+        .circle4{
+            width: 80px;
+            height: 80px;
+            border-radius: 100px;
+            background: #3e9aff;
+            position: absolute;
+            top: 70%;
+            left: 15%;
+            z-index: 4;
+            cursor: pointer;
+            animation: fourth-circle 11s linear infinite;
+        }
+
+
+        .circle5{
+            width: 80px;
+            height: 80px;
+            border-radius: 100px;
+            background: #fecdff;
+            position: absolute;
+            top: 80%;
+            right: 15%;
+            z-index: 5;
+            cursor: pointer;
+            animation: fifth-circle 9s ease-in infinite;
+        }
+
+
+        .main-modal{
+            position: absolute;
+            font-size: 22px;
+            font-weight: 500;
+            color: red;
+            width: 100%;
+            padding: 10%;
+            box-sizing: border-box;
+            z-index: 10;
+            text-align: center;
+            background: #b7d180;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.7s;
+        }
+
+        .active{
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+        .modal-content{
+            position: absolute;
+            width: 120%;
+            height: 100%;
+            background: #e2ff9c;
+            visibility: hidden;
+            text-align: center;
+        }
+
+        @keyframes first-circle {
+            50%{
+                top: 80%;
+                left: 80%;
+            }
+            100%{
+                top: 5%;
+                left: 5%;
+            }
+        }
+
+        @keyframes second-circle{
+            50%{
+                top: 80%;
+                right: 80%;
+            }
+            100%{
+                top: 5%;
+                right: 5%;
+            }
+        }
+
+        @keyframes third-circle{
+            50%{
+                top: 85%;
+                left: 50%;
+            }
+            100%{
+                top: 5%;
+                left: 45%;
+            }
+        }
+
+
+        @keyframes fourth-circle{
+            50%{
+                top: 10%;
+                left: 30%;
+            }
+            100%{
+                top: 70%;
+                left: 15%;
+            }
+        }
+
+        @keyframes fifth-circle{
+            50%{
+                top: 10%;
+                right: 30%;
+            }
+            100%{
+                top: 80%;
+                right: 10%;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="main-modal">ПОРА СКАЧАТЬ НАШЕ ПРИЛОЖЕНИЕ!</div>
+    <div class="circle circle1">
+        <div class="modal-content">Вы выиграли 200 баллов!!!</div>
+    </div>
+    <div class="circle circle2">
+        <div class="modal-content">Вы выиграли 100 баллов!!!</div>
+    </div>
+    <div class="circle circle3">
+        <div class="modal-content">Вы выиграли 500 баллов!!!</div>
+    </div>
+    <div class="circle circle4">
+        <div class="modal-content">Вы выиграли 300 баллов!!!</div>
+    </div>
+    <div class="circle circle5">
+        <div class="modal-content">Вы выиграли 150 баллов!!!</div>
+    </div>
+</div>
+<script>
+    let circles = document.querySelectorAll('.circle');
+    let mainModal = document.querySelector('.main-modal');
+    let counter = 0;
+    circles.forEach(
+        circle => {
+            circle.addEventListener(
+                'click',
+                () => {
+                    circle.children[0].style.visibility = 'visible';
+                    circle.style.animation = 'none';
+                    counter++;
+                    if (counter === 4){
+                        mainModal.classList.add('active');
+                        circles.forEach(
+                            circle => {
+                                circle.style.animation = 'none';
+                            }
+                        )
+                    }
+                }
+            )
+        }
+    )
+    setTimeout(
+        () => {
+            alert('Да');
+        }, 1000
+    )
+</script>
+<!--<script>-->
+    <!--let containerEl = document.querySelector('.container');-->
+    <!--console.log(containerEl.offsetHeight, containerEl.offsetWidth);-->
+    <!--let circleFirst = document.querySelector('.circle');-->
+    <!--let circleSecond = document.querySelector('.circle2');-->
+    <!--let circleFirstEl = getComputedStyle(circleFirst);-->
+    <!--let circleSecondEl = getComputedStyle(circleSecond);-->
+    <!--let pos1 = [parseInt(circleFirstEl.left), parseInt(circleFirstEl.top)];-->
+    <!--let pos2 = [parseInt(circleSecondEl.right), parseInt(circleSecondEl.top)];-->
+    <!--function animate1() {-->
+
+        <!--pos1[0]++;-->
+        <!--pos1[1]++;-->
+        <!--circleFirst.style.top =  pos1[0] + 'px';-->
+        <!--circleFirst.style.right = pos1[1] + 'px';-->
+
+        <!--if (pos1[0] == containerEl.offsetHeight) {-->
+            <!--pos1[0]&#45;&#45;;-->
+            <!--pos1[1]&#45;&#45;;-->
+        <!--}-->
+
+        <!--// pos1[0] <= containerEl.offsetHeight-->
+    <!--}-->
+
+    <!--function animate2() {-->
+        <!--pos2[0]++;-->
+        <!--pos2[1]++;-->
+        <!--circleSecond.style.top =  pos2[0] + 'px';-->
+        <!--circleSecond.style.right = pos2[1] + 'px';-->
+    <!--}-->
+
+    <!--// Math.floor(Math.random() * pos1[0])-->
+
+    <!--setInterval(function() {-->
+        <!--animate1();-->
+        <!--animate2();-->
+    <!--}, 20)-->
+
+<!--</script>-->
+</body>
+</html>
